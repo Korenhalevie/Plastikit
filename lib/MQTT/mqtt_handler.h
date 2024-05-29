@@ -3,15 +3,8 @@
 
 #include <PubSubClient.h>
 
-
 extern const int pinMQTTMessages;
 extern const int blinkDelay;
-
-extern const char *mqtt_broker;
-extern const char *topic;
-extern const char *mqtt_username;
-extern const char *mqtt_password;
-extern const int mqtt_port;
 
 void mqtt_setup();
 void mqtt_loop();

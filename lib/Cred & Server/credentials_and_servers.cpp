@@ -1,4 +1,6 @@
-// // WiFi credentials
+#include "credentials_and_servers.h"
+
+// WiFi credentials
 const char *ssid = "Halevie"; // Enter your WiFi name
 const char *password = "koren123";  // Enter WiFi password
 
