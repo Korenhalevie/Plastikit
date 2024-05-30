@@ -6,6 +6,7 @@
 #define pinStartConfirmation 21  // LED connected to digital pin 21
 #define pinHeating 4  // LED connected to digital pin 21
 #define buttonStart 19  // LED connected to digital pin 21
+#define buttonWeight 13 // 
 #define pinEngine 18  // LED connected to digital pin 21
 #define pinHX711_dout 5 // mcu > HX711 dout pin
 #define pinHX711_sck 15 // mcu > HX711 sck pin

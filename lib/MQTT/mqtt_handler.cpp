@@ -11,12 +11,12 @@ void mqtt_setup() {
     client.setServer(mqtt_broker, mqtt_port);
     client.setCallback(callback);
     while (!client.connected()) {
-        String client_id = "esp32-client-";
+        String client_id = "Plastikit_prototype";
         client_id += String(WiFi.macAddress());
         Serial.printf("The client %s connects to the public mqtt broker\n", client_id.c_str());
         if (client.connect(client_id.c_str(), mqtt_username, mqtt_password)) {
             Serial.println("Public emqx mqtt broker connected");
-            client.subscribe("plastikit/status");  // Subscribe to the topic
+            client.subscribe(topic);  // Subscribe to the topic
         } else {
             Serial.print("Failed with state ");
             Serial.print(client.state());
