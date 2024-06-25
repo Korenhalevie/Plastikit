@@ -3,4 +3,4 @@
 
 void GPIO_Init(void);
 
-#endif
+#endif // INIT_FUNCTIONS_H

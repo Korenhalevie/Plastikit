@@ -2,7 +2,7 @@
 #include "MeasureW.h"
 
 // Define the calibration factor
-const float calibration_factor = 452.85;
+const float calibration_factor = 476.53;
 
 float normalizeWeight(float weight) {
     // Normalize weight to nearest whole gram

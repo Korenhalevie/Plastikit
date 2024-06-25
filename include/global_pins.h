@@ -1,22 +1,24 @@
 #ifndef GLOBAL_PINS_H
 #define GLOBAL_PINS_H
 
-#define pinWifiLed  23  // LED connected to digital pin 23
-#define pinMQTTMessages 22  // LED connected to digital pin 22
-#define pinStartConfirmation 21  // LED connected to digital pin 21
-#define pinHeating 4  // LED connected to digital pin 21
-#define buttonStart 19  // LED connected to digital pin 21
-#define buttonWeight 13 // 
-#define pinEngine 18  // LED connected to digital pin 21
-#define pinHX711_dout 5 // mcu > HX711 dout pin
-#define pinHX711_sck 15 // mcu > HX711 sck pin
+#define PIN_WIFI_LED 23
+#define PIN_MQTT_MESSAGES 22
+#define PIN_START_CONFIRMATION 21
+#define PIN_HEATING 4
+#define BUTTON_START 19
+#define BUTTON_WEIGHT 13
+#define PIN_ENGINE 18
+#define PIN_HX711_DOUT 5
+#define PIN_HX711_SCK 15
+#define PIN_THERMO_DO 12
+#define PIN_THERMO_CS 27
+#define PIN_THERMO_CLK 14
 
 // Define custom I2C pins for LCD
 #define I2C_SDA 25
 #define I2C_SCL 26
 
-
-#define blinkDelay 500  // Delay time in milliseconds
+#define BLINK_DELAY 500
 
 extern int buttonStartState;
 extern bool startingFlag;

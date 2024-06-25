@@ -1,11 +1,11 @@
 #include "mqtt_handler.h"
-#include "global_pins.h"
 #include "credentials_and_servers.h"
+#include "global_pins.h"
 #include <WiFi.h>
+#include "lcd_handler.h"
 
 WiFiClient espClient;
 PubSubClient client(espClient);
-String receivedMessage = "";
 
 void mqtt_setup() {
     client.setServer(mqtt_broker, mqtt_port);
@@ -29,9 +29,9 @@ void publishMessage(const char* m) {
     Serial.println("Publishing message...");
     if (client.publish(topic, m)) {
         Serial.println("Message published to topic");
-        digitalWrite(pinMQTTMessages, HIGH);  // Turn the LED on
-        delay(blinkDelay);
-        digitalWrite(pinMQTTMessages, LOW);  // Turn the LED off
+        digitalWrite(PIN_MQTT_MESSAGES, HIGH);  // Turn the LED on
+        delay(BLINK_DELAY);
+        digitalWrite(PIN_MQTT_MESSAGES, LOW);  // Turn the LED off
         Serial.println("MQTT message published and LED blinked");
     } else {
         Serial.println("Failed to publish message");
@@ -46,7 +46,7 @@ void callback(char *topic, byte *payload, unsigned int length) {
     Serial.print("Message arrived in topic: ");
     Serial.println(topic);
     Serial.print("Message: ");
-    receivedMessage = "";
+    String receivedMessage = "";
     for (int i = 0; i < length; i++) {
         Serial.print((char) payload[i]);
         receivedMessage += (char) payload[i];
@@ -59,9 +59,9 @@ void callback(char *topic, byte *payload, unsigned int length) {
 
     // Blink the LED when a message is received
     if (String(topic) == "plastikit/status") {
-        digitalWrite(pinMQTTMessages, HIGH);  // Turn the LED on
-        delay(blinkDelay);
-        digitalWrite(pinMQTTMessages, LOW);  // Turn the LED off
+        digitalWrite(PIN_MQTT_MESSAGES, HIGH);  // Turn the LED on
+        delay(BLINK_DELAY);
+        digitalWrite(PIN_MQTT_MESSAGES, LOW);  // Turn the LED off
     }
 
     // Perform actions based on the received message
@@ -70,36 +70,38 @@ void callback(char *topic, byte *payload, unsigned int length) {
 
 void handleReceivedMessage(const String &message) {
     if (message.equals("12")) {
-        digitalWrite(pinMQTTMessages, HIGH);  // Turn the LED on
-        delay(blinkDelay);
-        digitalWrite(pinMQTTMessages, LOW);  // Turn the LED off
+        digitalWrite(PIN_MQTT_MESSAGES, HIGH);  // Turn the LED on
+        delay(BLINK_DELAY);
+        digitalWrite(PIN_MQTT_MESSAGES, LOW);  // Turn the LED off
         Serial.println("Performing action1");
     } else if (message.equals("13")) {
-        digitalWrite(pinMQTTMessages, HIGH);  // Turn the LED on
+        digitalWrite(PIN_MQTT_MESSAGES, HIGH);  // Turn the LED on
         Serial.println("Performing action2");
     } else if (message.equals("14")) {
-        digitalWrite(pinMQTTMessages, LOW);  // Turn the LED off
+        digitalWrite(PIN_MQTT_MESSAGES, LOW);  // Turn the LED off
         Serial.println("Performing action3");
     } else if (message.equals("blink")) {
         for (int i = 0; i < 3; i++) {
-            digitalWrite(pinMQTTMessages, HIGH);  // Turn the LED on
-            delay(blinkDelay);
-            digitalWrite(pinMQTTMessages, LOW);  // Turn the LED off
-            delay(blinkDelay);
+            digitalWrite(PIN_MQTT_MESSAGES, HIGH);  // Turn the LED on
+            delay(BLINK_DELAY);
+            digitalWrite(PIN_MQTT_MESSAGES, LOW);  // Turn the LED off
+            delay(BLINK_DELAY);
         }
         Serial.println("Performing blink");
     } else if (message.equals("Start_confirmation")) {
         startingFlag = true;
         for (int i = 0; i < 2; i++) {
-            digitalWrite(pinStartConfirmation, HIGH);  // Turn the LED on
-            delay(blinkDelay);
-            digitalWrite(pinStartConfirmation, LOW);  // Turn the LED off
-            delay(blinkDelay);
+            digitalWrite(PIN_START_CONFIRMATION, HIGH);  // Turn the LED on
+            delay(BLINK_DELAY);
+            digitalWrite(PIN_START_CONFIRMATION, LOW);  // Turn the LED off
+            delay(BLINK_DELAY);
+
         }
-        digitalWrite(pinStartConfirmation, HIGH);  // Turn the LED on
+        displayMessage("Click on blue", "button to start");
+        digitalWrite(PIN_START_CONFIRMATION, HIGH);  // Turn the LED on
     } else if (message.equals("abort")) {
         startingFlag = false;
-        digitalWrite(pinStartConfirmation, LOW);  // Turn the LED off
+        digitalWrite(PIN_START_CONFIRMATION, LOW);  // Turn the LED off
         Serial.println("Performing action2");
     } else {
         Serial.println("Unknown action");
