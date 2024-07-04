@@ -29,6 +29,8 @@ void resetMachine() {
 
     displayMessage("Please start the", "proccess on app");
     publishMessage("Init machine");
+    publishMessage("Init machine");
+    publishMessage("Init machine");
 }
 
 void handleHeating() {
@@ -54,7 +56,9 @@ void checkTemperature() {
     }
     
     if (heatingState && currentTemp >= heatingStartEngineTemp && !heatingMessageSent) {
-        publishMessage("engineStarting");
+        publishMessage("engine_starting");
+        publishMessage("engine_starting");
+        publishMessage("engine_starting");
         heatingMessageSent = true;
 
         digitalWrite(PIN_ENGINE, HIGH);
@@ -65,10 +69,12 @@ void checkTemperature() {
 }
 
 void handleEngineStop() {
+    publishMessage("scaling");
     Serial.println("Engine currently running: Stopping engine on button press");
-    digitalWrite(PIN_ENGINE, LOW);
     heatingState = false;
     displayMessage("Press the yellow", "button to scale");
+    digitalWrite(PIN_ENGINE, LOW);
+    digitalWrite(PIN_HEATING, heatingState ? HIGH : LOW);
     transformationDone = true;
     heatingMessageSent = false;
     engineOn = false;
@@ -77,12 +83,12 @@ void handleEngineStop() {
 
 void handleScaling() {
     float weight = scale.get_units(10);
-    float normalizedWeight = normalizeWeight(weight);
+    float normalizedWeight = normalizeWeight(weight) - 10;
     Serial.print("Weight: ");
     Serial.print(normalizedWeight);
     Serial.println(" grams");
 
-    String message = String(normalizedWeight) + "g";
+    String message = String(normalizedWeight) + "gr";
     publishMessage(message.c_str());
 
     message = String(normalizedWeight) + " Grams";

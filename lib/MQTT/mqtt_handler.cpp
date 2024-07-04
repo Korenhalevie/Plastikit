@@ -69,15 +69,15 @@ void callback(char *topic, byte *payload, unsigned int length) {
 }
 
 void handleReceivedMessage(const String &message) {
-    if (message.equals("12")) {
+    if (message.equals("test1")) {
         digitalWrite(PIN_MQTT_MESSAGES, HIGH);  // Turn the LED on
         delay(BLINK_DELAY);
         digitalWrite(PIN_MQTT_MESSAGES, LOW);  // Turn the LED off
         Serial.println("Performing action1");
-    } else if (message.equals("13")) {
+    } else if (message.equals("test2")) {
         digitalWrite(PIN_MQTT_MESSAGES, HIGH);  // Turn the LED on
         Serial.println("Performing action2");
-    } else if (message.equals("14")) {
+    } else if (message.equals("test3")) {
         digitalWrite(PIN_MQTT_MESSAGES, LOW);  // Turn the LED off
         Serial.println("Performing action3");
     } else if (message.equals("blink")) {
@@ -97,6 +97,7 @@ void handleReceivedMessage(const String &message) {
             delay(BLINK_DELAY);
 
         }
+        publishMessage("Start_confirmation_recieved");
         displayMessage("Click on blue", "button to start");
         digitalWrite(PIN_START_CONFIRMATION, HIGH);  // Turn the LED on
     } else if (message.equals("abort")) {

@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"name": "Plastikit_0_1",
+			"path": "../.."
+		},
+		{
+			"name": "Teststm",
+			"path": "../../../../../../../מסמכים/PlatformIO/Projects/Teststm"
+		},
+		{
+			"name": "Stm32tet",
+			"path": "../../../../../../../מסמכים/PlatformIO/Projects/Stm32tet"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"string": "cpp",
+			"cmath": "cpp",
+			"system_error": "cpp"
+		}
+	}
+}
